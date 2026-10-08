@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sports & Past Simple – Interactive Lesson</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#eef3fb;--card:#fff;--ink:#14213d;--mute:#5d6b86;--line:#d9e1f0;--acc:#ff6b2c;--accd:#d9501a;--hero:#14213d;--heroink:#fff;--soft:#fff1ea;--ok:#12805c;--okb:#dff5ea;--bad:#c0392b;--badb:#fde8e5;--warn:#8a5a00;--warnb:#fff4d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1424;--card:#16203a;--ink:#eaf0ff;--mute:#9fb0d3;--line:#2a3860;--acc:#ff8a4f;--accd:#ff6b2c;--hero:#0a1020;--soft:#2a2233;--ok:#4fd1a1;--okb:#143a30;--bad:#ff8a80;--badb:#44201f;--warn:#f0c060;--warnb:#3a3015}}
+:root[data-theme="dark"]{--bg:#0d1424;--card:#16203a;--ink:#eaf0ff;--mute:#9fb0d3;--line:#2a3860;--acc:#ff8a4f;--accd:#ff6b2c;--hero:#0a1020;--soft:#2a2233;--ok:#4fd1a1;--okb:#143a30;--bad:#ff8a80;--badb:#44201f;--warn:#f0c060;--warnb:#3a3015}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*:before,*:after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Trebuchet MS",Verdana,sans-serif}
+.hero{background:var(--hero);color:var(--heroink);padding:20px 16px 18px;border-bottom:6px solid var(--acc)}
+.in{max-width:740px;margin:0 auto}
+.hero h1{margin:0;font:bold 1.6rem/1.2 Georgia,serif}
+.hero p{margin:4px 0 12px;opacity:.8;font-size:.95rem}
+.bar{height:12px;background:rgba(255,255,255,.2);border-radius:8px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--acc);border-radius:8px;transition:width .5s}
+.pt{font-size:.85rem;margin-top:6px;opacity:.85}
+main{max-width:740px;margin:0 auto;padding:14px 16px 40px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;padding:4px 0 12px}
+.tabs button{flex:0 0 auto;display:flex;align-items:center;gap:8px;border:2px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:24px;cursor:pointer;font:inherit;font-size:.9rem}
+.tabs .lb{display:none}.tabs button.on .lb{display:inline}@media(min-width:640px){.tabs .lb{display:inline}}
+.tabs button{padding:6px 10px}
+.tabs b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--line);font-size:.8rem}
+.tabs button.on{border-color:var(--acc);background:var(--soft)}
+.tabs button.on b{background:var(--acc);color:#fff}
+.tabs button.done b{background:var(--ok);color:#fff}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 4px 14px rgba(20,33,61,.07)}
+h2{margin:0 0 4px;font:bold 1.3rem Georgia,serif}
+.mute{color:var(--mute);font-size:.92rem}
+.q{border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:12px}
+.q.ok{border-color:var(--ok);background:var(--okb)}
+.q.no{border-color:var(--bad);background:var(--badb)}
+.qn{font-weight:bold;color:var(--acc);margin-right:6px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+button{font:inherit}
+.btn{border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:8px 14px;cursor:pointer;font-size:.95rem}
+.btn.p{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:bold}
+.btn:hover:not(:disabled){filter:brightness(.95)}
+.btn:disabled{cursor:not-allowed;opacity:.6}
+.opt{font-size:1.05rem;padding:10px 16px}
+.opt.sel{border-color:var(--acc);background:var(--soft)}
+.opt.ok{border-color:var(--ok);background:var(--okb);opacity:1}
+.opt.no{border-color:var(--bad);background:var(--badb);opacity:1}
+input[type=text],select{font:inherit;padding:7px 10px;border:2px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);max-width:100%}
+input[type=text]{width:9em}
+input.ok,select.ok{border-color:var(--ok);background:var(--okb)}
+input.no,select.no{border-color:var(--bad);background:var(--badb)}
+input:disabled,select:disabled{opacity:1;color:var(--ink)}
+.fb{font-size:.92rem;margin-top:8px;min-height:1.2em}
+.fb.ok{color:var(--ok)}.fb.no{color:var(--bad)}.fb.h{color:var(--warn)}
+.bank{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0;padding:12px;background:var(--soft);border-radius:12px}
+.chip{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:3px 14px;font-size:.95rem}
+.chip.used{opacity:.35;text-decoration:line-through}
+.story p{line-height:2.4;margin:12px 0 0}
+.story input{width:6.5em;margin:0 2px}
+.tag{font-size:.8rem;color:var(--mute)}
+.wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+td,th{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+.vt td:nth-child(2) input{width:8em}
+.sc{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:.95rem;font-weight:bold}
+.sc span{background:var(--hero);color:#fff;border-radius:20px;padding:3px 14px}
+.done-banner{margin-top:14px;padding:12px;border-radius:12px;background:var(--okb);color:var(--ok);font-weight:bold}
+.big{font:bold 3rem/1 Georgia,serif;color:var(--acc)}
+.pager{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:14px}.pm{text-align:center;flex:1}.pl{font-size:.9rem;font-weight:bold}.dots{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin-top:6px}.dots i{width:12px;height:12px;border-radius:50%;background:var(--line);cursor:pointer;display:block}.dots i.ok{background:var(--ok)}.dots i.no{background:var(--bad)}.dots i.cur{outline:2px solid var(--acc);outline-offset:2px}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+</style></head><body>
+<div class="hero"><div class="in"><h1>Sports & Past Simple</h1><p id="hi">Practise sports words and past simple verbs.</p><div class="bar"><i id="pb"></i></div><div class="pt" id="pt"></div></div></div>
+<main><nav class="tabs" id="tabs"></nav><div id="view"></div></main>
+<script>
+var S={name:"",cur:{}};
+function save(){try{localStorage.setItem("sps_v2",JSON.stringify(S))}catch(e){}}
+try{var raw=localStorage.getItem("sps_v2");if(raw){var o=JSON.parse(raw);if(o&&typeof o==="object"){S.name=o.name||"";S.cur=o.cur||{}}}}catch(e){}
+
+var ODD=[
+{g:["football","basketball","skiing"],a:"skiing",w:"Football and basketball are ball sports; skiing is not."},
+{g:["tennis","sailing","swimming"],a:"tennis",w:"Sailing and swimming are water sports; tennis is played on a court."},
+{g:["rugby","cycling","horse-riding"],a:"rugby",w:"Cycling and horse-riding are individual sports; rugby is a team ball sport."},
+{g:["golf","hockey","judo"],a:"judo",w:"Golf and hockey use equipment and a ball; judo does not."},
+{g:["athletics","volleyball","tennis"],a:"athletics",w:"Volleyball and tennis use a ball and a net; athletics does not."},
+{g:["climbing","skiing","hockey"],a:"hockey",w:"Climbing and skiing are outdoor mountain sports; hockey is a team ball game."}];
+var BOX=["started","did","travelled","went","became","won","competed"];
+var FILL=[["My sister"," around Australia last summer.","travelled"],["Andy Murray"," the Wimbledon tennis tournament in 2013.","won"],["Nadia Comăneci"," in the Montreal Olympics when she was fourteen.","competed"],["Last year my family and I"," to Turkey.","went"],["I"," all my homework at school.","did"],["Pelé"," to play football for the Brazil national team when he was sixteen.","started"],["One Direction"," really famous in 2010.","became"]];
+var VERBS=[["learn","learned|learnt","R"],["give","gave","I"],["see","saw","I"],["play","played","R"],["come","came","I"],["live","lived","R"],["finish","finished","R"],["speak","spoke","I"],["eat","ate","I"]];
+var TXT=["Dr Ludwig Guttmann ","(be)"," a German doctor and he ","(work)"," in a hospital in England during the Second World War. His patients ","(have)"," serious problems with their backs, but Dr Guttmann ","(use)"," sport to help them. He ","(begin)"," a sports competition at the hospital. Soon people from other countries ","(come)"," to the hospital games. In September 1960 the hospital games ","(change)"," to the Paralympics and the first competition ","(take)"," place in Rome. Athletes from twenty-three countries ","(compete)"," in the events. Italy ","(win)"," eighty medals!"];
+var ANS=["was","worked","had","used","began","came","changed","took","competed","won"];
+var SEC=[{id:"odd",t:"Odd one out",n:ODD.length},{id:"fill",t:"Word box",n:FILL.length},{id:"verbs",t:"Past forms",n:VERBS.length*2},{id:"story",t:"Paralympics",n:ANS.length},{id:"read",t:"Reading",n:5},{id:"neg",t:"Questions",n:6},{id:"result",t:"My results",n:0},{id:"fix",t:"Fix mistakes",n:0}];
+var order=["odd","fill","verbs","story","read","neg","result","fix"];
+var tab=S.name?"odd":"welcome";
+var V=document.getElementById("view");
+
+function $(h){var d=document.createElement("div");d.innerHTML=h;return d.firstChild}
+function norm(s){return (s||"").toLowerCase().trim().replace(/\s+/g," ")}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function got(id,k){return (S.cur[id]||{})[k]}
+function count(id){return Object.keys(S.cur[id]||{}).length}
+function score(id){var r=S.cur[id]||{},s=0;for(var k in r)s+=r[k].ok?1:0;return s}
+function mark(id,k,ok,v){S.cur[id]=S.cur[id]||{};S.cur[id][k]={ok:ok?1:0,v:v};save();header();updSum(id)}
+function sec(id){return SEC.filter(function(s){return s.id===id})[0]}
+function sumHtml(id){var n=sec(id).n,c=count(id);return '<div class="sc" id="sum">Score <span>'+score(id)+' / '+n+'</span><em class="mute" style="font-weight:normal">'+c+' of '+n+' checked</em></div>'}
+function updSum(id){var e=document.getElementById("sum");if(e)e.outerHTML=sumHtml(id);var b=document.getElementById("nx");if(b)b.style.display=count(id)>=sec(id).n?"block":"none"}
+function nextBox(id){var nx=order[order.indexOf(id)+1];return '<div id="nx" class="done-banner" style="display:'+(count(id)>=sec(id).n?"block":"none")+'">Section complete! <button class="btn p" style="margin-left:8px" onclick="go(\''+nx+'\')">'+(nx==="result"?"See my results":"Next section")+'</button></div>'}
+function go(t){tab=t;render();window.scrollTo(0,0)}
+function header(){
+ var t=0,c=0;SEC.forEach(function(s){t+=s.n;c+=count(s.id)});
+ document.getElementById("pb").style.width=(t?c/t*100:0)+"%";
+ document.getElementById("pt").textContent=c+" of "+t+" answers checked";
+ if(S.name)document.getElementById("hi").textContent="Hi "+S.name+"! Pick an answer, then press Check. Answers lock once checked.";
+ var nv=document.getElementById("tabs");nv.innerHTML="";
+ SEC.forEach(function(s,i){var b=document.createElement("button");var d=s.n&&count(s.id)>=s.n;
+  b.className=(tab===s.id?"on ":"")+(d?"done":"");b.innerHTML='<b>'+(d?"✓":(s.n?i+1:(s.id==="fix"?"↻":"★")))+'</b><span class="lb">'+s.t+'</span>';b.title=s.t;b.setAttribute('aria-label',s.t);
+  b.onclick=function(){go(S.name?s.id:"welcome")};nv.appendChild(b)});
+}
+function render(){
+ header();V.innerHTML="";
+ if(!S.name||tab==="welcome"){
+  var w=$('<div class="card"><h2>Welcome!</h2><p>Learn sports words and the past simple in six short activities. Each answer locks after you check it, so your results show what you really know.</p><div class="row"><input id="nm" type="text" placeholder="Your name" aria-label="Your name" style="width:14em"><button class="btn p" id="go">Start learning</button></div></div>');
+  V.appendChild(w);
+  var go1=function(){var v=document.getElementById("nm").value.trim();if(!v)return;S.name=v;save();tab="odd";render()};
+  document.getElementById("go").onclick=go1;document.getElementById("nm").onkeydown=function(e){if(e.key==="Enter")go1()};
+  return}
+ ({odd:rOdd,fill:rFill,verbs:rVerbs,story:rStory,read:function(){rMC("read","Reading check","Think about the Paralympics text and choose the best answer.",READ)},neg:function(){rMC("neg","Negatives and questions","Choose the correct past simple sentence.",NEG)},result:rResult,fix:rFix})[tab]();paginate();
+}
+function finish(q,fb,ok,txt){q.classList.add(ok?"ok":"no");fb.className="fb "+(ok?"ok":"no");fb.textContent=(ok?"✓ Correct! ":"✗ Not quite. ")+txt}
+
+function rOdd(){
+ var c=$('<div class="card"><h2>Find the odd word out</h2><div class="mute">Tap the word that does not belong in each group, then press Check.</div><div id="l"></div></div>');
+ var l=c.querySelector("#l");
+ ODD.forEach(function(q,i){
+  var d=$('<div class="q"><div><span class="qn">'+(i+1)+'</span></div><div class="row"></div><div class="fb"></div></div>');
+  var row=d.children[1],fb=d.children[2],pick=null,btns=[],saved=got("odd",i);
+  q.g.forEach(function(w){var b=document.createElement("button");b.className="btn opt";b.textContent=w;
+   b.onclick=function(){pick=w;btns.forEach(function(x){x.classList.remove("sel")});b.classList.add("sel")};btns.push(b);row.appendChild(b)});
+  var ck=document.createElement("button");ck.className="btn p";ck.textContent="Check";
+  
+  function lock(p){btns.forEach(function(x){x.disabled=true;x.classList.remove("sel");if(x.textContent===q.a)x.classList.add("ok");else if(x.textContent===p)x.classList.add("no")});ck.disabled=true;finish(d,fb,p===q.a,q.w)}
+  ck.onclick=function(){if(!pick){fb.className="fb h";fb.textContent="Pick a word first.";return}lock(pick);mark("odd",i,pick===q.a,pick)};
+  row.appendChild(ck);l.appendChild(d);
+  if(saved)lock(saved.v)});
+ c.appendChild($(sumHtml("odd")));c.appendChild($(nextBox("odd")));V.appendChild(c)}
+
+function rFill(){
+ var c=$('<div class="card"><h2>Complete the sentences</h2><div class="mute">Choose the correct word from the box. Use each word once.</div><div class="bank" id="bk"></div><div id="l"></div></div>');
+ var bk=c.querySelector("#bk");BOX.forEach(function(w){var s=document.createElement("span");s.className="chip";s.textContent=w;s.dataset.w=w;bk.appendChild(s)});
+ var sels=[];
+ function chips(){var u={};sels.forEach(function(s){if(s.value)u[s.value]=1});bk.querySelectorAll(".chip").forEach(function(ch){ch.classList.toggle("used",!!u[ch.dataset.w])})}
+ var l=c.querySelector("#l");
+ FILL.forEach(function(q,i){
+  var d=$('<div class="q"><span class="qn">'+(i+1)+'</span>'+esc(q[0])+' <select aria-label="Sentence '+(i+1)+'"><option value="">choose…</option>'+BOX.map(function(w){return '<option>'+w+'</option>'}).join("")+'</select>'+esc(q[1])+'<div class="row"><button class="btn p">Check</button></div><div class="fb"></div></div>');
+  var sel=d.querySelector("select"),fb=d.querySelector(".fb"),ck=d.querySelector(".p");sels.push(sel);sel.onchange=chips;
+  function lock(v){sel.value=v;sel.disabled=true;ck.disabled=true;var ok=v===q[2];sel.className=ok?"ok":"no";finish(d,fb,ok,ok?"":"The answer is “"+q[2]+"”.");chips()}
+  ck.onclick=function(){if(!sel.value){fb.className="fb h";fb.textContent="Choose a word first.";return}lock(sel.value);mark("fill",i,sel.value===q[2],sel.value)};
+  l.appendChild(d);var sv=got("fill",i);if(sv)lock(sv.v)});
+ c.appendChild($(sumHtml("fill")));c.appendChild($(nextBox("fill")));V.appendChild(c)}
+
+function rVerbs(){
+ var c=$('<div class="card"><h2>Past simple forms</h2><div class="mute">Write the past simple, then choose regular (R) or irregular (I). Regular verbs end in -ed or -d.</div><div id="l"></div></div>');
+ var l=c.querySelector("#l");
+ VERBS.forEach(function(v,i){
+  var d=$('<div class="q"><span class="qn">'+(i+1)+'</span><b>'+v[0]+'</b><div class="row"><input type="text" aria-label="Past of '+v[0]+'" autocapitalize="none" autocomplete="off" placeholder="past form"><select aria-label="Regular or irregular"><option value="">R or I?</option><option value="R">R – regular</option><option value="I">I – irregular</option></select><button class="btn p">Check</button></div><div class="fb"></div></div>');
+  var inp=d.querySelector("input"),sel=d.querySelector("select"),fb=d.querySelector(".fb"),ck=d.querySelector(".p");
+  var forms=v[1].split("|");
+  function lock(a,b){inp.value=a;sel.value=b;inp.disabled=sel.disabled=ck.disabled=true;var o1=forms.indexOf(norm(a))>-1,o2=b===v[2];inp.className=o1?"ok":"no";sel.className=o2?"ok":"no";
+   finish(d,fb,o1&&o2,o1&&o2?"":"Answer: "+forms.join(" / ")+" ("+v[2]+")")}
+  ck.onclick=function(){if(!inp.value.trim()||!sel.value){fb.className="fb h";fb.textContent="Fill in both the verb and R or I.";return}
+   var a=inp.value,b=sel.value;lock(a,b);mark("verbs","a"+i,forms.indexOf(norm(a))>-1,a);mark("verbs","b"+i,b===v[2],b)};
+  l.appendChild(d);var s1=got("verbs","a"+i),s2=got("verbs","b"+i);if(s1&&s2)lock(s1.v,s2.v)});
+ c.appendChild($(sumHtml("verbs")));c.appendChild($(nextBox("verbs")));V.appendChild(c)}
+
+function rStory(){
+ var c=$('<div class="card story"><h2>The first Paralympic Games</h2><div class="mute">Type the past simple of each verb in brackets, then press Check all.</div><p id="p"></p><div class="row"><button class="btn p" id="ck">Check all</button></div><div class="fb" id="fb"></div></div>');
+ var p=c.querySelector("#p"),ins=[];
+ TXT.forEach(function(seg){
+  if(seg.charAt(0)==="("){var i=document.createElement("input");i.type="text";i.setAttribute("aria-label","Past of "+seg);i.autocomplete="off";i.autocapitalize="none";ins.push(i);p.appendChild(i);var sp=document.createElement("span");sp.className="tag";sp.textContent=seg+" ";p.appendChild(sp)}
+  else p.appendChild(document.createTextNode(seg))});
+ var fb=c.querySelector("#fb"),ck=c.querySelector("#ck");
+ function lock(vals){var g=0;ins.forEach(function(i,k){i.value=vals[k];i.disabled=true;var ok=norm(vals[k])===ANS[k];i.className=ok?"ok":"no";if(ok)g++;if(!ok)i.title="Answer: "+ANS[k]});ck.disabled=true;
+  fb.className="fb "+(g===ANS.length?"ok":"h");
+  var wrong=[];ins.forEach(function(i,k){if(norm(vals[k])!==ANS[k])wrong.push((k+1)+". "+ANS[k])});
+  fb.textContent=g===ANS.length?"Perfect, "+S.name+"!":g+" of "+ANS.length+" correct. Correct answers for the red boxes: "+wrong.join(", ")}
+ ck.onclick=function(){var vals=ins.map(function(i){return i.value});if(vals.some(function(v){return !v.trim()})){fb.className="fb h";fb.textContent="Fill in all the blanks first.";return}
+  vals.forEach(function(v,k){mark("story",k,norm(v)===ANS[k],v)});lock(vals);
+  document.getElementById("nx").style.display="block"};
+ if(count("story")>=ANS.length)lock(ANS.map(function(_,k){return got("story",k).v}));
+ c.appendChild($(sumHtml("story")));c.appendChild($(nextBox("story")));V.appendChild(c)}
+
+function rResult(){
+ var rows="",sc=0,tot=0,weak=[],left=0;
+ SEC.forEach(function(s){if(!s.n)return;var a=score(s.id),c=count(s.id);sc+=a;tot+=s.n;if(c<s.n)left+=s.n-c;
+  rows+='<tr><td>'+s.t+'</td><td><b>'+a+' / '+s.n+'</b></td><td>'+(c>=s.n?"Done":c+" of "+s.n+" checked")+'</td></tr>';
+  if(c&&a/s.n<.7)weak.push(s.t)});
+ var pct=tot?Math.round(sc/tot*100):0;
+ var msg=left?"You still have "+left+" answers to check.":(pct>=85?"Excellent work, "+S.name+"!":pct>=60?"Good job, "+S.name+". Review the topics below.":"Keep practising, "+S.name+". Review the topics below.");
+ var c=$('<div class="card"><h2>My results</h2><div class="big">'+pct+'%</div><p>'+msg+' ('+sc+' of '+tot+' points)</p><div class="wrap"><table><tr><th>Section</th><th>Score</th><th>Status</th></tr>'+rows+'</table></div>'+(weak.length?'<p><b>Review these:</b> '+weak.join(", ")+'</p>':'')+(wrongItems().length?'<div class="row"><button class="btn p" onclick="go(\'fix\')">Practise my mistakes ('+wrongItems().length+')</button></div>':'')+'</div>');
+ V.appendChild(c)}
+
+var READ=[
+{q:"Where did Dr Guttmann work during the Second World War?",o:["In a school in Germany","In a hospital in England","In a sports club in Italy"],a:"In a hospital in England",w:"He worked in a hospital in England."},
+{q:"What was wrong with his patients?",o:["They had problems with their eyes","They were very young","They had serious problems with their backs"],a:"They had serious problems with their backs",w:"His patients had serious back problems."},
+{q:"When did the hospital games change to the Paralympics?",o:["In 1948","In September 1960","In 2010"],a:"In September 1960",w:"The change happened in September 1960."},
+{q:"Where did the first Paralympic competition take place?",o:["In London","In Berlin","In Rome"],a:"In Rome",w:"It took place in Rome."},
+{q:"How many medals did Italy win?",o:["Sixty","Twenty-three","Eighty"],a:"Eighty",w:"Italy won eighty medals."}];
+var NEG=[
+{q:"Make this negative: My sister travelled around Australia.",o:["My sister didn't travelled around Australia.","My sister didn't travel around Australia.","My sister not travel around Australia."],a:"My sister didn't travel around Australia.",w:"After didn't, use the base form: travel."},
+{q:"Make this a question: Andy Murray won the tournament.",o:["Did Andy Murray won the tournament?","Andy Murray did win the tournament?","Did Andy Murray win the tournament?"],a:"Did Andy Murray win the tournament?",w:"Did + subject + base form: win."},
+{q:"Make this negative: Pelé started to play at sixteen.",o:["Pelé didn't start to play at sixteen.","Pelé didn't started to play at sixteen.","Pelé wasn't start to play at sixteen."],a:"Pelé didn't start to play at sixteen.",w:"didn't + base form: start."},
+{q:"Make this a question: You went to Turkey.",o:["Did you went to Turkey?","Did you go to Turkey?","Do you went to Turkey?"],a:"Did you go to Turkey?",w:"Did + subject + base form: go."},
+{q:"Make this negative: Nadia competed in Montreal.",o:["Nadia didn't compete in Montreal.","Nadia didn't competed in Montreal.","Nadia not competed in Montreal."],a:"Nadia didn't compete in Montreal.",w:"didn't + base form: compete."},
+{q:"Make this a question: One Direction became famous in 2010.",o:["Did One Direction became famous in 2010?","Was One Direction become famous in 2010?","Did One Direction become famous in 2010?"],a:"Did One Direction become famous in 2010?",w:"Did + subject + base form: become."}];
+
+function rMC(id,title,intro,arr){
+ var c=$('<div class="card"><h2>'+title+'</h2><div class="mute">'+intro+'</div><div id="l"></div></div>');
+ var l=c.querySelector("#l");
+ arr.forEach(function(q,i){
+  var d=$('<div class="q"><div><span class="qn">'+(i+1)+'</span>'+esc(q.q)+'</div><div class="row" style="flex-direction:column;align-items:stretch"></div><div class="row"></div><div class="fb"></div></div>');
+  var opts=d.children[1],act=d.children[2],fb=d.children[3],pick=null,btns=[];
+  q.o.forEach(function(w){var b=document.createElement("button");b.className="btn opt";b.style.textAlign="left";b.textContent=w;
+   b.onclick=function(){pick=w;btns.forEach(function(x){x.classList.remove("sel")});b.classList.add("sel")};btns.push(b);opts.appendChild(b)});
+  var ck=document.createElement("button");ck.className="btn p";ck.textContent="Check";act.appendChild(ck);
+  function lock(p){btns.forEach(function(x){x.disabled=true;x.classList.remove("sel");if(x.textContent===q.a)x.classList.add("ok");else if(x.textContent===p)x.classList.add("no")});ck.disabled=true;finish(d,fb,p===q.a,q.w)}
+  ck.onclick=function(){if(!pick){fb.className="fb h";fb.textContent="Pick an answer first.";return}lock(pick);mark(id,i,pick===q.a,pick)};
+  l.appendChild(d);var sv=got(id,i);if(sv)lock(sv.v)});
+ c.appendChild($(sumHtml(id)));c.appendChild($(nextBox(id)));V.appendChild(c)}
+
+function wrongItems(){
+ var it=[],VB=TXT.filter(function(x){return x.charAt(0)==="("}).map(function(x){return x.slice(1,-1)});
+ function bad(id,k){var r=got(id,k);return r&&!r.ok}
+ ODD.forEach(function(q,i){if(bad("odd",i))it.push({q:"Which word is the odd one out?",o:q.g,a:q.a,w:q.w})});
+ FILL.forEach(function(q,i){if(bad("fill",i))it.push({q:q[0]+" ___ "+q[1].trim(),o:BOX,a:q[2],w:""})});
+ VERBS.forEach(function(v,i){var f=v[1].split("|");
+  if(bad("verbs","a"+i))it.push({q:"Past simple of “"+v[0]+"”",t:f,a:f[0],w:""});
+  if(bad("verbs","b"+i))it.push({q:"Is “"+v[0]+"” (past: "+f[0]+") regular or irregular?",o:["regular","irregular"],a:v[2]==="R"?"regular":"irregular",w:""})});
+ ANS.forEach(function(x,k){if(bad("story",k))it.push({q:"Paralympics text, blank "+(k+1)+": past simple of “"+VB[k]+"”",t:[x],a:x,w:""})});
+ READ.forEach(function(q,i){if(bad("read",i))it.push(q)});
+ NEG.forEach(function(q,i){if(bad("neg",i))it.push(q)});
+ return it}
+
+function rFix(){
+ var it=wrongItems();
+ if(!it.length){V.appendChild($('<div class="card"><h2>Fix mistakes</h2><p>'+(totalChecked()?"No mistakes to practise. Great job, "+esc(S.name)+"!":"Finish some activities first. Your mistakes will appear here.")+'</p></div>'));return}
+ var fixed=0,done=0,c=$('<div class="card"><h2>Fix my mistakes</h2><div class="mute">Try the questions you missed again. This round is for practice and does not change your results.</div><div id="l"></div><div class="sc" id="fs">Fixed <span>0 / '+it.length+'</span></div></div>');
+ var l=c.querySelector("#l");
+ it.forEach(function(q,i){
+  var d=$('<div class="q"><div><span class="qn">'+(i+1)+'</span>'+esc(q.q)+'</div><div class="row"></div><div class="fb"></div></div>');
+  var row=d.children[1],fb=d.children[2],pick=null,btns=[],inp=null;
+  if(q.o){q.o.forEach(function(w){var b=document.createElement("button");b.className="btn opt";b.textContent=w;b.onclick=function(){pick=w;btns.forEach(function(x){x.classList.remove("sel")});b.classList.add("sel")};btns.push(b);row.appendChild(b)})}
+  else{inp=document.createElement("input");inp.type="text";inp.autocomplete="off";inp.autocapitalize="none";row.appendChild(inp)}
+  var ck=document.createElement("button");ck.className="btn p";ck.textContent="Check";row.appendChild(ck);
+  ck.onclick=function(){var v=inp?inp.value:pick;if(!v||!String(v).trim()){fb.className="fb h";fb.textContent="Give an answer first.";return}
+   var ok=inp?q.t.indexOf(norm(v))>-1:v===q.a;
+   btns.forEach(function(x){x.disabled=true;x.classList.remove("sel");if(x.textContent===q.a)x.classList.add("ok");else if(x.textContent===v)x.classList.add("no")});
+   if(inp){inp.disabled=true;inp.className=ok?"ok":"no"}ck.disabled=true;
+   finish(d,fb,ok,ok?(q.w||""):"Answer: "+q.a+(q.w?". "+q.w:""));
+   done++;if(ok)fixed++;document.getElementById("fs").innerHTML='Fixed <span>'+fixed+' / '+it.length+'</span>'+(done===it.length?'<em class="mute" style="font-weight:normal">Round finished</em>':'')};
+  l.appendChild(d)});
+ V.appendChild(c)}
+function totalChecked(){var c=0;SEC.forEach(function(s){c+=count(s.id)});return c}
+
+function paginate(){
+ var qs=[].slice.call(V.querySelectorAll(".q"));if(qs.length<2)return;
+ var host=qs[0].parentNode,idx=qs.length-1;
+ for(var i=0;i<qs.length;i++){if(!/\b(ok|no)\b/.test(qs[i].className)){idx=i;break}}
+ var pg=document.createElement("div");pg.className="pager";
+ pg.innerHTML='<button class="btn">← Back</button><div class="pm"><div class="pl"></div><div class="dots"></div></div><button class="btn p">Next →</button>';
+ host.parentNode.insertBefore(pg,host.nextSibling);
+ var pv=pg.children[0],pn=pg.children[2],pl=pg.querySelector(".pl"),dt=pg.querySelector(".dots");
+ function show(){
+  qs.forEach(function(q,i){q.style.display=i===idx?"":"none"});
+  pl.textContent="Question "+(idx+1)+" of "+qs.length;
+  dt.innerHTML="";
+  qs.forEach(function(q,i){var d=document.createElement("i");var st=/\bok\b/.test(q.className)?"ok":/\bno\b/.test(q.className)?"no":"";
+   d.className=st+(i===idx?" cur":"");d.onclick=function(){idx=i;show()};dt.appendChild(d)});
+  pv.disabled=idx===0;pn.disabled=idx===qs.length-1;
+ }
+ pv.onclick=function(){if(idx>0){idx--;show()}};
+ pn.onclick=function(){if(idx<qs.length-1){idx++;show()}};
+ host.addEventListener("click",function(){setTimeout(show,0)});
+ show();
+}
+render();
+</script></body></html>
